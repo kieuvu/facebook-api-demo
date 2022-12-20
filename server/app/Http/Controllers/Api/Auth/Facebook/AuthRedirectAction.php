@@ -6,15 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Services\Auth\FacebookProvider;
 use Illuminate\Http\Request;
 
-class CallbackAction extends Controller
+class AuthRedirectAction extends Controller
 {
     public function __invoke(Request $request)
     {
-        $user = FacebookProvider::callback();
+        $redirectUrl = FacebookProvider::redirect();
 
         return response()->json([
             'status' => true,
-            'payload' => $user
+            'payload' => [
+                'url' => $redirectUrl,
+            ]
         ], 200);
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\Facebook\CallbackAction;
-use App\Http\Controllers\Api\Auth\Facebook\RedirectAction;
+use App\Http\Controllers\Api\Auth\Facebook\AuthCallbackAction;
+use App\Http\Controllers\Api\Auth\Facebook\AuthRedirectAction;
+use App\Http\Controllers\Api\Webhook\Facebook\WebhookCallbackAction;
+use App\Http\Controllers\Api\Webhook\Facebook\WebhookSubscribeAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('/auth')->group(function () {
-    Route::prefix('/facebook')->group(function () {
-        Route::get('/redirect', RedirectAction::class);
-        Route::post('/callback', CallbackAction::class);
+Route::prefix('/facebook')->group(function () {
+    Route::prefix('/auth')->group(function () {
+        Route::get('/redirect', AuthRedirectAction::class);
+        Route::post('/callback', AuthCallbackAction::class);
+    });
+
+    Route::prefix('/webhook')->group(function () {
+        Route::get('/callback', WebhookSubscribeAction::class);
+        Route::post('/callback', WebhookCallbackAction::class);
     });
 });
