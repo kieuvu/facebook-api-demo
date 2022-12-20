@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import LoginView from '../views/LoginView.vue';
+import AuthView from '../views/Auth/AuthView.vue';
+import AuthCallback from '../views/Auth/AuthCallback.vue';
 
 Vue.use(VueRouter);
 
@@ -12,9 +13,14 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/login',
-    name: 'login',
-    component: LoginView
+    path: '/auth',
+    name: 'auth',
+    component: AuthView
+  },
+  {
+    path: '/auth/callback',
+    name: 'authCallback',
+    component: AuthCallback
   },
 ];
 
