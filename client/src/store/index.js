@@ -27,7 +27,7 @@ export default new Vuex.Store({
       window.location.href = redirectUrl;
     },
 
-    authorize: async function (context, payload) {
+    authorize: async function (_, payload) {
       const response = await Vue.axios.post(`http://localhost:8000/api/auth/facebook/callback?code=${payload.code}`);
       const user = response.data;
 
