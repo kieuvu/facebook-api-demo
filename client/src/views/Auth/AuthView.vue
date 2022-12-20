@@ -1,17 +1,23 @@
 <template>
   <div class="vh-100 d-flex align-items-center justify-content-center">
-    <button class="login__button login__button-facebook">Login with Facebook</button>
+    <button @click="redirect()" class="login__button login__button-facebook">
+      Login with Facebook
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "LoginView",
+  name: "AuthView",
   components: {},
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    redirect: async function () {
+      await this.$store.dispatch("getRedirectUrl");
+    },
+  },
 };
 </script>
 
