@@ -22,13 +22,13 @@ export default new Vuex.Store({
 
   actions: {
     getRedirectUrl: async function () {
-      const response = await Vue.axios.get("http://localhost:8000/api/auth/facebook/redirect");
+      const response = await Vue.axios.get("http://localhost:8000/api/facebook/auth/redirect");
       const redirectUrl = response.data.payload.url;
       window.location.href = redirectUrl;
     },
 
     authorize: async function (_, payload) {
-      const response = await Vue.axios.post(`http://localhost:8000/api/auth/facebook/callback?code=${payload.code}`);
+      const response = await Vue.axios.post(`http://localhost:8000/api/facebook/auth/callback?code=${payload.code}`);
       const user = response.data;
 
       localStorage.setItem("loggingUser", JSON.stringify(user));
