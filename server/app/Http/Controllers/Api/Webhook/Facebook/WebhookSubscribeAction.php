@@ -10,6 +10,6 @@ class WebhookSubscribeAction extends Controller
 {
     public function __invoke(Request $request)
     {
-        return response()->json(FacebookWebhook::subscribe($request->all()), 200);
+        return response(FacebookWebhook::subscribe($request->all()), 200);
     }
 }
