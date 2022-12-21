@@ -13,6 +13,7 @@ class FacebookWebhook
 
     public static function callback(array $payload)
     {
+        logger()->info("Event: ", $payload);
         return event(new FacebookEvent($payload));
     }
 }
