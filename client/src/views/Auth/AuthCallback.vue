@@ -15,6 +15,7 @@ export default {
   async created() {
     const code = this.$route.query.code;
     await this.$store.dispatch("authorize", { code: code });
+    this.$router.push("/");
   },
 };
 </script>

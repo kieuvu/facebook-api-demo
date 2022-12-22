@@ -15,7 +15,8 @@ export default {
   },
   methods: {
     redirect: async function () {
-      await this.$store.dispatch("getRedirectUrl");
+      const redirectUrl = await this.$store.dispatch("getRedirectUrl");
+      window.location.href = redirectUrl;
     },
   },
 };
