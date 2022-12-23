@@ -9,7 +9,7 @@
       <p><b>Id: </b>{{ loggingUser.payload.user.id }}</p>
       <p><b>Email: </b>{{ loggingUser.payload.user.email }}</p>
       <p><b>Token: </b>{{ loggingUser.payload.user.token }}</p>
-      <notifications />
+      <notifications class="mt-3" />
     </div>
   </div>
 </template>
