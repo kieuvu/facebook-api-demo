@@ -27,9 +27,15 @@ export default new Vuex.Store({
 
     authorize: async function (_, payload) {
       const response = await Vue.axios.post(`http://localhost:8000/api/facebook/auth/callback?code=${payload.code}`);
+
       const user = response.data;
 
-      localStorage.setItem("loggingUser", JSON.stringify(user));
+      if (!user) {
+        return false;
+      }
+
+      localStorage.setItem("loggingUser", JSON.stringify(user.payload));
+      return true;
     },
 
     logout: function () {
