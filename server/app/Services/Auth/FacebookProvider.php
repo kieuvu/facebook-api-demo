@@ -2,11 +2,13 @@
 
 namespace App\Services\Auth;
 
+use App\Services\UserService;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class FacebookProvider
 {
-    public static $scope = [
+    private static $scope = [
         'user_birthday', 'user_hometown', 'user_location',
         'user_likes', 'user_photos', 'user_videos',
         'user_friends', 'user_posts', 'user_gender',
@@ -27,8 +29,19 @@ class FacebookProvider
             ->stateless()
             ->user();
 
-        $auth['token'] = $auth->token;
+        $userData = [
+            "name" => $auth->name,
+            "facebook_id" => $auth->id,
+            "email" => $auth->email,
+            "token" => $auth->token,
+            "avatar_url" => $auth->avatar,
+            "gender" => $auth->user["gender"],
+        ];
 
-        return $auth;
+        $user = app(UserService::class)->saveUser($userData);
+
+        Auth::login($user);
+
+        return $user;
     }
 }
