@@ -5,10 +5,12 @@
     </div>
     <h1 class="text-danger">Homepage</h1>
     <div v-if="loggingUser">
-      <p><b>Username: </b>{{ loggingUser.payload.user.name }}</p>
-      <p><b>Id: </b>{{ loggingUser.payload.user.id }}</p>
-      <p><b>Email: </b>{{ loggingUser.payload.user.email }}</p>
-      <p><b>Token: </b>{{ loggingUser.payload.user.token }}</p>
+      <p><b>Username: </b>{{ loggingUser.name }}</p>
+      <p><b>Id: </b>{{ loggingUser.facebook_id }}</p>
+      <p><b>Email: </b>{{ loggingUser.email }}</p>
+      <p><b>Token: </b>{{ loggingUser.token }}</p>
+      <p><b>Gender: </b>{{ loggingUser.gender }}</p>
+      <p><b>Avatar: </b><img :src="loggingUser.avatar_url" alt="" /></p>
       <notifications class="mt-3" />
     </div>
   </div>
