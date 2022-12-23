@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import router from '@/router';
 
 Vue.use(Vuex);
 
@@ -23,8 +22,7 @@ export default new Vuex.Store({
   actions: {
     getRedirectUrl: async function () {
       const response = await Vue.axios.get("http://localhost:8000/api/facebook/auth/redirect");
-      const redirectUrl = response.data.payload.url;
-      window.location.href = redirectUrl;
+      return response.data.payload.url;
     },
 
     authorize: async function (_, payload) {
@@ -32,8 +30,10 @@ export default new Vuex.Store({
       const user = response.data;
 
       localStorage.setItem("loggingUser", JSON.stringify(user));
+    },
 
-      router.push("/");
+    logout: function () {
+      localStorage.clear();
     }
   },
 
